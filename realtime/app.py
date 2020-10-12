@@ -33,7 +33,7 @@ def pull_epoch(inlet):
 def create_mne_epochs(epoch: np.array):
     epoch = np.array(scipy.signal.resample(epoch, DURATION * SAMPLING_FREQ)).transpose()
     epoch = np.delete(epoch, (-1), axis=0)
-    info = mne.create_info(ch_names=CHANNELS, sfreq=SAMPLING_FREQ, ch_types=['eeg'] * len(CHANNELS))
+    info = mne.create_info(ch_names=CHANNELS, sfreq=SAMPLING_FREQ, ch_types=['eeg'] * len(CHANNELS), verbose=False)
     raw = mne.io.RawArray(epoch, info, verbose=False)
     return mne.make_fixed_length_epochs(raw, duration=DURATION, preload=True, verbose=False)
 
